@@ -3,6 +3,30 @@ employeePassword:string,
 employeeMatchPassword:string, employeeNumber:number,currentField:string,
 currentForm:number,moneypass:string;
 
+class Employee{
+     name:string;
+     gender:string;
+     email:string;
+     password:string;
+     cnfPassword:string;
+}
+let emp1: Employee = new Employee(); 
+
+class Vehicle{
+    name:string;
+    vehType:string;
+    vehNumber:string;
+}
+
+let veh1:Vehicle = new Vehicle();
+
+class Pass{
+    currType:string;
+    passType:string;
+
+}
+
+let pass1:Pass = new Pass();
 
 /* event listener for enter key */
 window.addEventListener('keypress', function (e) {
@@ -90,7 +114,7 @@ function submitForm() {
 }
 
 /* validating password against weak , moderate and strong */
-function validatePassword() {
+function validatePassword():boolean {
 
     var employeePassword = (<HTMLInputElement>document.getElementById("epass")).value;
     document.getElementById("epass").style.borderWidth = "thick";
@@ -124,11 +148,12 @@ function onBlur():boolean {
         onBlurForm3();
         return false;
     }
+    
     var label = document.getElementById("labelText");
     switch (currentField) {
 
         case "name":
-             employeeName = (<HTMLInputElement>document.getElementById("ename")).value;
+             emp1.name = (<HTMLInputElement>document.getElementById("ename")).value;
 
             if (!(/^[A-z ]{2,}$/.test(employeeName))) {
                 document.getElementById("error").innerHTML = "please enter valid name";
@@ -144,8 +169,8 @@ function onBlur():boolean {
             break;
 
         case "gender":
-
-            var employeeGender = document.getElementsByName("egender");
+            let employeeGender = document.getElementsByName("egender");
+            emp1.gender = (<HTMLInputElement>document.querySelector('input[name="egender"]:checked')).value;
             if ((!(<HTMLInputElement>employeeGender[0]).checked) && (!(<HTMLInputElement>employeeGender[1]).checked)) {
                 document.getElementById("error").innerHTML = "Please select gender";
                 return false;
@@ -162,8 +187,8 @@ function onBlur():boolean {
             break;
 
         case "email":
-            var employeeEmail = (<HTMLInputElement>document.getElementById("eemail")).value;
-
+            let employeeEmail = (<HTMLInputElement>document.getElementById("eemail")).value;
+            emp1.email = employeeEmail;
             if (!(/^[A-z]+@[A-z]+\.[A-z]+$/.test(employeeEmail))) {
                 document.getElementById("error").innerHTML = "please enter valid email address";
                 return false;
@@ -180,7 +205,7 @@ function onBlur():boolean {
 
         case "password":
             var employeePassword = (<HTMLInputElement>document.getElementById("epass")).value;
-
+            emp1.password= employeePassword;
             if (!(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/.test(employeePassword))) {
                 document.getElementById("error").innerHTML = "password should contains Uppercase, Lowercase, Numeric and min 8 characters";
                 return false;
@@ -200,6 +225,7 @@ function onBlur():boolean {
         case "cnfrmpasswrd":
             var employeePassword = (<HTMLInputElement>document.getElementById("epass")).value;
             var employeeMatchPassword = (<HTMLInputElement>document.getElementById("ecnfrmpass")).value;
+            emp1.cnfPassword = employeeMatchPassword;
 
             if (employeePassword != employeeMatchPassword) {
                 document.getElementById("error").innerHTML = "password doesn't match";
@@ -230,6 +256,7 @@ function onBlurForm2():void {
 
         case "vehName":
             var vehicleName = (<HTMLInputElement>document.getElementById("vname")).value;
+            veh1.name = vehicleName;
             if (vehicleName == "") {
                 document.getElementById("error").innerHTML = "required";
                 return;
@@ -244,6 +271,7 @@ function onBlurForm2():void {
         case "vehType":
             var vehicleType = (<HTMLInputElement>document.getElementById("vtype")).value;
             var vehicleName = (<HTMLInputElement>document.getElementById("vname")).value;
+            veh1.vehType = vehicleType;
 
             if (vehicleType == "") {
                 document.getElementById("error").innerHTML = "required";
@@ -262,6 +290,7 @@ function onBlurForm2():void {
             var vehNumber = (<HTMLInputElement>document.getElementById("vnumber")).value;
             var vehicleName = (<HTMLInputElement>document.getElementById("vname")).value;
 
+            veh1.vehNumber = vehNumber;
             if (vehNumber == "") {
                 document.getElementById("error").innerHTML = "required";
                 return;
@@ -290,8 +319,16 @@ function onBlurForm3():void {
     switch (currentField) {
 
         case "currency":
-            var currency = (<HTMLInputElement>document.getElementById("currency")).value;
+         //   var currencyTypeElement = document.getElementById("currency");
+           // var currencyType: string = (<HTMLSelectElement>currencyTypeElement).options[(<HTMLSelectElement>currencyTypeElement).selectedIndex].value;
+            
+           
+            pass1.currType =  (<HTMLInputElement>document.getElementById("currType")).value;
+
             var vehicleType = (<HTMLInputElement>document.getElementById("vtype")).value;
+            
+            pass1.passType = (<HTMLInputElement>document.getElementById("plans")).value;
+            
             document.getElementById("currType").style.display = "none";
             document.getElementById("label").innerHTML = "choose paln for your " + vehicleType;
             showPrice();

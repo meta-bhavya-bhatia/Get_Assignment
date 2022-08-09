@@ -1,4 +1,22 @@
 var employeeName, employeeGender, employeeEmail, employeePassword, employeeMatchPassword, employeeNumber, currentField, currentForm, moneypass;
+var Employee = /** @class */ (function () {
+    function Employee() {
+    }
+    return Employee;
+}());
+var emp1 = new Employee();
+var Vehicle = /** @class */ (function () {
+    function Vehicle() {
+    }
+    return Vehicle;
+}());
+var veh1 = new Vehicle();
+var Pass = /** @class */ (function () {
+    function Pass() {
+    }
+    return Pass;
+}());
+var pass1 = new Pass();
 /* event listener for enter key */
 window.addEventListener('keypress', function (e) {
     if (e.keyCode == 13) {
@@ -98,7 +116,7 @@ function onBlur() {
     var label = document.getElementById("labelText");
     switch (currentField) {
         case "name":
-            employeeName = document.getElementById("ename").value;
+            emp1.name = document.getElementById("ename").value;
             if (!(/^[A-z ]{2,}$/.test(employeeName))) {
                 document.getElementById("error").innerHTML = "please enter valid name";
                 return false;
@@ -113,8 +131,9 @@ function onBlur() {
             currentField = "gender";
             break;
         case "gender":
-            var employeeGender = document.getElementsByName("egender");
-            if ((!employeeGender[0].checked) && (!employeeGender[1].checked)) {
+            var employeeGender_1 = document.getElementsByName("egender");
+            emp1.gender = document.querySelector('input[name="egender"]:checked').value;
+            if ((!employeeGender_1[0].checked) && (!employeeGender_1[1].checked)) {
                 document.getElementById("error").innerHTML = "Please select gender";
                 return false;
             }
@@ -128,8 +147,9 @@ function onBlur() {
             currentField = "email";
             break;
         case "email":
-            var employeeEmail = document.getElementById("eemail").value;
-            if (!(/^[A-z]+@[A-z]+\.[A-z]+$/.test(employeeEmail))) {
+            var employeeEmail_1 = document.getElementById("eemail").value;
+            emp1.email = employeeEmail_1;
+            if (!(/^[A-z]+@[A-z]+\.[A-z]+$/.test(employeeEmail_1))) {
                 document.getElementById("error").innerHTML = "please enter valid email address";
                 return false;
             }
@@ -144,6 +164,7 @@ function onBlur() {
             break;
         case "password":
             var employeePassword = document.getElementById("epass").value;
+            emp1.password = employeePassword;
             if (!(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/.test(employeePassword))) {
                 document.getElementById("error").innerHTML = "password should contains Uppercase, Lowercase, Numeric and min 8 characters";
                 return false;
@@ -160,6 +181,7 @@ function onBlur() {
         case "cnfrmpasswrd":
             var employeePassword = document.getElementById("epass").value;
             var employeeMatchPassword = document.getElementById("ecnfrmpass").value;
+            emp1.cnfPassword = employeeMatchPassword;
             if (employeePassword != employeeMatchPassword) {
                 document.getElementById("error").innerHTML = "password doesn't match";
                 return false;
@@ -182,6 +204,7 @@ function onBlurForm2() {
     switch (currentField) {
         case "vehName":
             var vehicleName = document.getElementById("vname").value;
+            veh1.name = vehicleName;
             if (vehicleName == "") {
                 document.getElementById("error").innerHTML = "required";
                 return;
@@ -195,6 +218,7 @@ function onBlurForm2() {
         case "vehType":
             var vehicleType = document.getElementById("vtype").value;
             var vehicleName = document.getElementById("vname").value;
+            veh1.vehType = vehicleType;
             if (vehicleType == "") {
                 document.getElementById("error").innerHTML = "required";
                 return;
@@ -209,6 +233,7 @@ function onBlurForm2() {
         case "vehNumber":
             var vehNumber = document.getElementById("vnumber").value;
             var vehicleName = document.getElementById("vname").value;
+            veh1.vehNumber = vehNumber;
             if (vehNumber == "") {
                 document.getElementById("error").innerHTML = "required";
                 return;
@@ -228,8 +253,11 @@ function onBlurForm2() {
 function onBlurForm3() {
     switch (currentField) {
         case "currency":
-            var currency = document.getElementById("currency").value;
+            //   var currencyTypeElement = document.getElementById("currency");
+            // var currencyType: string = (<HTMLSelectElement>currencyTypeElement).options[(<HTMLSelectElement>currencyTypeElement).selectedIndex].value;
+            pass1.currType = document.getElementById("currType").value;
             var vehicleType = document.getElementById("vtype").value;
+            pass1.passType = document.getElementById("plans").value;
             document.getElementById("currType").style.display = "none";
             document.getElementById("label").innerHTML = "choose paln for your " + vehicleType;
             showPrice();

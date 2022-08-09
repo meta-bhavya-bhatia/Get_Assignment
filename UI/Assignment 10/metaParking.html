@@ -117,16 +117,16 @@
             </div>
             <div class="form-group" id="currType" style="display: none">
                 <select id="currency" class="form-control w-50" >
-                    <option value="" selected disabled hidden>Choose here</option>
+                    <!--<option value="" selected disabled hidden>Choose here</option>-->
                     <option value="INR">INR</option>
                     <option value="USD">USD</option>
                     <option value="YEN">YEN</option>
                 </select>
             </div>
             <div class="form-group" id="plans" style="display: none">
-                <input type="radio" id="daily1" name="passtype">&nbsp;Daily - <label id="daily"></label><br />
-                <input type="radio" id="Monthly2" name="passtype">&nbsp;Monthly - <label id="monthly"></label><br />
-                <input type="radio" id="Yearly3" name="passtype">&nbsp;Yearly - <label id="yearly"></label><br><br />
+                <input type="radio" id="daily1" name="passtype" value="Daily">&nbsp;Daily - <label id="daily"></label><br />
+                <input type="radio" id="Monthly2" name="passtype" value="Monthly">&nbsp;Monthly - <label id="monthly"></label><br />
+                <input type="radio" id="Yearly3" name="passtype" value="Yearly">&nbsp;Yearly - <label id="yearly"></label><br><br />
             </div>
             <div class="form-group next" style="display: none" id="submit">
                 <button type="button" onclick="submitForm()" class="btn btn-primary mt-2">Submit</button>
