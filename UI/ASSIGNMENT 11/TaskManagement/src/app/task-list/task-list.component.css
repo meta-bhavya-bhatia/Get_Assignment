@@ -1,0 +1,35 @@
+.class-flex{
+    margin-top: 4% ;
+    display: flex;
+    justify-content: space-around;
+}
+#header{
+    border-bottom: 1px solid grey;
+}
+
+.task-status{
+    text-align: center;
+    width:20%;
+    height:auto;
+    background: rgb(219, 221, 215);
+}
+.task h2 ,.task p {
+    font-size: 100%;
+    text-align: left;
+}
+.task{
+    width: 96%;
+    margin-left: 2%;
+}
+
+/*#new-task{
+    background-color: rgb(136, 207, 255);
+}
+#in-progress-task{
+    background-color: rgb(243, 113, 113);
+} 
+#completed-task{
+    display: flex;
+    border: 1px solid black;
+    background-color: rgb(13, 247, 255);
+}*/

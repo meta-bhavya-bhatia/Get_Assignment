@@ -1,0 +1,158 @@
+
+<section id="task-status" class="class-flex ">
+    <div  class="task-status">
+        <label>New</label>
+        
+        <div  class="task" *ngFor="let task of taskArray">
+              <div *ngIf="task.status=='new' && task.priority=='high'" class="task">
+                  <button type="button" class="btn bg-primary text-white task " (click)="this.taskService.populateTask(task)"  data-toggle="modal" data-target="#editTaskModal">
+                    
+                    <h2>{{task.title}}</h2>
+                    <p>{{task.description}}</p>
+                      
+                  </button>
+                </div>
+        </div>
+
+        <div  class="task" *ngFor="let task of taskArray">
+            <div *ngIf="task.status=='new' && task.priority=='medium'" class="task">
+                <button type="button" class="btn  bg-info text-white task " (click)="this.taskService.populateTask(task)"  data-toggle="modal" data-target="#editTaskModal">
+                  <h2>{{task.title}}</h2>
+                  <p>{{task.description}}</p>  
+                </button>
+              </div>
+      </div>
+
+      <div  class="task" *ngFor="let task of taskArray">
+          <div *ngIf="task.status=='new' && task.priority=='low'" >
+              <button type="button" class="btn btn-info task" (click)="this.taskService.populateTask(task)"  data-toggle="modal" data-target="#editTaskModal">
+                <h2>{{task.title}}</h2>
+                <p>{{task.description}}</p>  
+              </button>
+            </div>
+      </div>
+
+    </div>
+    <div  class="task-status">
+        <label>In Progress</label>
+        <div  class="task" *ngFor="let task of taskArray">
+            <div *ngIf="task.status=='progress' && task.priority=='high'">
+                <button type="button" class="btn alert alert-danger task " (click)="this.taskService.populateTask(task)"  data-toggle="modal" data-target="#editTaskModal">
+                    <h2>{{task.title}}</h2>
+                    <p>{{task.description}}</p>  
+                </button>
+            </div>
+          </div>
+          <div  class="task" *ngFor="let task of taskArray">
+              <div *ngIf="task.status=='progress' && task.priority=='medium'">
+                  <button type="button" class="btn alert alert-danger task " (click)="this.taskService.populateTask(task)"  data-toggle="modal" data-target="#editTaskModal">
+                      <h2>{{task.title}}</h2>
+                      <p>{{task.description}}</p>  
+                  </button>
+              </div>
+            </div>
+            <div  class="task" *ngFor="let task of taskArray">
+                <div *ngIf="task.status=='progress' && task.priority=='low'">
+                    <button type="button" class="btn alert alert-danger task " (click)="this.taskService.populateTask(task)"  data-toggle="modal" data-target="#editTaskModal">
+                        <h2>{{task.title}}</h2>
+                        <p >{{task.description}}</p>  
+                    </button>
+                </div>
+        </div>
+    </div>
+    <div  class="task-status">
+        <label>Completed</label>
+        <div id="completed-task" class=" task " *ngFor="let task of taskArray">
+          
+            <div *ngIf="task.status=='completed'">
+              <div class="alert alert-success">
+                  <h2>{{task.title}}</h2>
+                  <p>{{task.description}}</p>
+              </div> 
+            </div>
+          
+          </div>
+    </div>
+  </section>
+
+
+
+  <!-- Modal for edit task-->
+  <div id="editTaskModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">-->
+  
+      <!-- Modal content-->
+      <div class="modal-content"> 
+        <div class="modal-header">
+          <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+          <h4 class="modal-title">Edit Task</h4>
+        </div>
+        <div class="modal-body"> 
+              <!--form of task-->
+              <div class="row m-3 ">
+                      <form [formGroup]="this.taskService.form" (ngSubmit)="onSubmit()" >
+                          <input type="hidden" formControlName="$key">
+                          <div class="form-group">
+                              <label >Title</label>
+                              <input type="text" formControlName="title" class="form-control" [ngClass]="{'is-invalid':submitted && formControls.title.errors }" >
+                              <div class="invalid-feedback" *ngIf="submitted && formControls.title.errors" >
+                                  Title is Required
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label >Description</label>
+                              <textarea  formControlName="description" class="form-control" [ngClass]="{'is-invalid':submitted && formControls.description.errors }" ></textarea>
+                              <div class="invalid-feedback" *ngIf="submitted && formControls.title.errors" >
+                                  Description is Required
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label >Change Status</label>
+                              
+                              <select formControlName="status" class="form-control"  *ngIf="this.taskService.form.get('status').value ==='new' ">
+                                
+                                  
+                                    <option value='new'>New</option>
+                                    <option value='progress' >In Progress</option>
+                                    <option value='completed'> Completed</option>
+                              </select>
+                
+                              <select formControlName="status" class="form-control"  *ngIf="this.taskService.form.get('status').value ==='progress' ">
+                                
+                                  
+                                  <option value='progress' >In Progress</option>
+                                  <option value='completed'> Completed</option>
+                            </select>
+                              
+                              <div class="invalid-feedback" *ngIf="submitted && formControls.priority.errors" >
+                                  Please Select an option
+                              </div>
+                          </div>  
+                          <div class="form-group">
+                              <label >Select Priority</label>
+                              <select formControlName="priority" class="form-control" [ngClass]="{'is-invalid':submitted && formControls.priority.errors }" >
+                                  <option value='high'>High</option>
+                                  <option value='medium' >Medium</option>
+                                  <option value='low'>Low</option>
+                              </select>
+                              <div class="invalid-feedback" *ngIf="submitted && formControls.priority.errors" >
+                                  Please Select an option
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <input type="submit"    class="btn btn-primary" value="Update">
+                          </div>
+                          
+                      </form>
+                      <div class="alert alert-info " *ngIf="showSucessMessage" >
+                          Task Updated !
+                      </div>
+                  </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>
