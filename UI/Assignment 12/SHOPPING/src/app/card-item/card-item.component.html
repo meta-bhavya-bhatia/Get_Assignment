@@ -1,0 +1,24 @@
+<div class="container" >                               
+  <select class=" form-control" style="width: 200px" (ngModel)="selectedDevice" (change)="onChange($event.target.value)">
+   
+    <option value="allCategory">all-category</option>
+    <option value="bread">Bread</option>
+    <option value="dairy">Dairy</option>
+    <option value="fruit">fruit</option>
+    <option value="SeasoingsAndSpices">Seasoings and spices</option>
+    <option value="vegetable">Vegetables</option>
+  </select>
+</div>
+
+<div id="product-div">
+
+  <div class="card" id="card-item" *ngFor="let cart of data">
+    <img src="{{cart.item_imageUrl}}" style="max-width: 300px;max-height: 400px">
+    <h1>{{ cart.item_name }}</h1>
+    <span class="price">{{cart.item_price}}</span>
+    <p>{{cart.item_description}}Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
+    <p><button (click) = 'sendDataToList(cart)'>Add to Cart</button></p>
+  </div>
+</div>
+
+
